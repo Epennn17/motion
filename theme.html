@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ganti Tema · Noerzpedia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    *:focus,
+    *:focus-visible,
+    button:focus,
+    button:focus-visible,
+    input:focus,
+    input:focus-visible,
+    a:focus,
+    a:focus-visible {
+      outline: none !important;
+      outline-color: transparent !important;
+      outline-style: none !important;
+      box-shadow: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+      -webkit-focus-ring-color: transparent !important;
+    }
+
+    :root {
+      --white: #ffffff;
+      --gray-light: #d4d4d8;
+      --gray: #a1a1aa;
+      --gray-dark: #71717a;
+      --gray-darker: #3f3f46;
+      --gray-deep: #27272a;
+      --black: #0a0a0a;
+      --border: rgba(255, 255, 255, 0.08);
+      --bg-body: #0a0a0a;
+      --text-body: #ffffff;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-body);
+      color: var(--text-body);
+      font-family: "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+    }
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.70) 50%, rgba(0, 0, 0, 0.85) 100%);
+    }
+    .dark-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.20));
+    }
+
+    .card {
+      width: 100%;
+      max-width: 380px;
+      background: #141418;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 24px 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: relative;
+      text-align: center;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .back-btn:hover {
+      color: var(--white);
+    }
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .icon-big {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px auto 16px;
+    }
+    .icon-big svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--gray-light);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .sub {
+      color: var(--gray);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .theme-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .theme-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-body);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+      text-align: left;
+      width: 100%;
+      outline: none !important;
+      box-shadow: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+    .theme-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .theme-btn .dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .theme-btn .dot.dark {
+      background: #0a0a0a;
+      border-color: #3a3a3a;
+    }
+    .theme-btn .dot.light {
+      background: #f0f0f0;
+      border-color: #cccccc;
+    }
+    .theme-btn .dot.gray {
+      background: #888888;
+      border-color: #666666;
+    }
+    .theme-btn .label {
+      flex: 1;
+    }
+    .theme-btn .check {
+      color: var(--gray-dark);
+      font-size: 14px;
+    }
+    .theme-btn.active {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .theme-btn.active .check {
+      color: var(--gray-light);
+    }
+
+    .footer {
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.20);
+      font-size: 9px;
+      letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 400px) {
+      .card {
+        padding: 24px 18px 20px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-bg">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="assets/header.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-overlay"></div>
+  <div class="dark-overlay"></div>
+
+  <div class="card" id="themeCard">
+
+    <a href="upgrade.html" class="back-btn">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Kembali
+    </a>
+
+    <div class="icon-big">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </div>
+
+    <h1>Ganti Tema</h1>
+    <div class="sub">Pilih tema yang sesuai dengan preferensimu</div>
+
+    <div class="theme-options">
+      <button class="theme-btn active" data-theme="dark" onclick="applyTheme('dark')">
+        <span class="dot dark"></span>
+        <span class="label">Gelap (Default)</span>
+        <span class="check">✓</span>
+      </button>
+
+      <button class="theme-btn" data-theme="light" onclick="applyTheme('light')">
+        <span class="dot light"></span>
+        <span class="label">Terang</span>
+        <span class="check">✓</span>
+      </button>
+
+      <button class="theme-btn" data-theme="gray" onclick="applyTheme('gray')">
+        <span class="dot gray"></span>
+        <span class="label">Abu-abu</span>
+        <span class="check">✓</span>
+      </button>
+    </div>
+
+    <div style="font-size:12px;color:var(--gray-dark);text-align:center;margin-top:8px;">
+      Tema akan diterapkan ke seluruh halaman.
+    </div>
+
+    <div class="footer">NoerzXMotion · 2026</div>
+  </div>
+
+  <script>
+    function applyTheme(theme) {
+      document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.querySelector(`.theme-btn[data-theme="${theme}"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      localStorage.setItem('noerzx_theme', theme);
+
+      const root = document.documentElement;
+
+      if (theme === 'dark') {
+        root.style.setProperty('--bg-body', '#0a0a0a');
+        root.style.setProperty('--text-body', '#ffffff');
+        root.style.setProperty('--white', '#ffffff');
+        root.style.setProperty('--gray-light', '#d4d4d8');
+        root.style.setProperty('--gray', '#a1a1aa');
+        root.style.setProperty('--gray-dark', '#71717a');
+        root.style.setProperty('--gray-darker', '#3f3f46');
+        root.style.setProperty('--gray-deep', '#27272a');
+        root.style.setProperty('--black', '#0a0a0a');
+        root.style.setProperty('--border', 'rgba(255, 255, 255, 0.08)');
+        document.body.style.background = '#0a0a0a';
+        document.body.style.color = '#ffffff';
+        document.querySelector('.card').style.background = '#141418';
+      } else if (theme === 'light') {
+        root.style.setProperty('--bg-body', '#f0f0f0');
+        root.style.setProperty('--text-body', '#111111');
+        root.style.setProperty('--white', '#111111');
+        root.style.setProperty('--gray-light', '#333333');
+        root.style.setProperty('--gray', '#666666');
+        root.style.setProperty('--gray-dark', '#999999');
+        root.style.setProperty('--gray-darker', '#cccccc');
+        root.style.setProperty('--gray-deep', '#e0e0e0');
+        root.style.setProperty('--black', '#f0f0f0');
+        root.style.setProperty('--border', 'rgba(0, 0, 0, 0.08)');
+        document.body.style.background = '#f0f0f0';
+        document.body.style.color = '#111111';
+        document.querySelector('.card').style.background = '#e8e8e8';
+      } else if (theme === 'gray') {
+        root.style.setProperty('--bg-body', '#1a1a1a');
+        root.style.setProperty('--text-body', '#e8e8e8');
+        root.style.setProperty('--white', '#e8e8e8');
+        root.style.setProperty('--gray-light', '#cccccc');
+        root.style.setProperty('--gray', '#aaaaaa');
+        root.style.setProperty('--gray-dark', '#7a7a7a');
+        root.style.setProperty('--gray-darker', '#4a4a4a');
+        root.style.setProperty('--gray-deep', '#2a2a2a');
+        root.style.setProperty('--black', '#1a1a1a');
+        root.style.setProperty('--border', 'rgba(255, 255, 255, 0.06)');
+        document.body.style.background = '#1a1a1a';
+        document.body.style.color = '#e8e8e8';
+        document.querySelector('.card').style.background = '#222222';
+      }
+
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+        background: rgba(20,20,24,0.94); border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 14px; padding: 12px 20px;
+        font-size: 13px; color: #d4d4d8;
+        backdrop-filter: blur(16px);
+        z-index: 99999;
+        animation: fadeIn 0.3s ease;
+      `;
+      toast.textContent = 'Tema berhasil diganti!';
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => toast.remove(), 400);
+      }, 2000);
+    }
+
+    const savedTheme = localStorage.getItem('noerzx_theme') || 'dark';
+    applyTheme(savedTheme);
+
+    const video = document.querySelector('video');
+    if (video) {
+      video.addEventListener('error', function() {
+        this.style.display = 'none';
+        document.querySelector('.video-bg').style.background = '#0a0a0a';
+      });
+    }
+  </script>
+
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  </style>
+
+</body>
+</html>

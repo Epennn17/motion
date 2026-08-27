@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syarat & Ketentuan · Noerzpedia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    *:focus,
+    *:focus-visible,
+    button:focus,
+    button:focus-visible,
+    input:focus,
+    input:focus-visible,
+    a:focus,
+    a:focus-visible {
+      outline: none !important;
+      outline-color: transparent !important;
+      outline-style: none !important;
+      box-shadow: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+      -webkit-focus-ring-color: transparent !important;
+    }
+
+    :root {
+      --white: #ffffff;
+      --gray-light: #d4d4d8;
+      --gray: #a1a1aa;
+      --gray-dark: #71717a;
+      --gray-darker: #3f3f46;
+      --gray-deep: #27272a;
+      --black: #0a0a0a;
+      --border: rgba(255, 255, 255, 0.08);
+      --bg-body: #0a0a0a;
+      --text-body: #ffffff;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-body);
+      color: var(--text-body);
+      font-family: "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+    }
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.70) 50%, rgba(0, 0, 0, 0.85) 100%);
+    }
+    .dark-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.20));
+    }
+
+    .card {
+      width: 100%;
+      max-width: 380px;
+      background: #141418;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 24px 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card::-webkit-scrollbar {
+      width: 4px;
+    }
+    .card::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .card::-webkit-scrollbar-thumb {
+      background: var(--gray-darker);
+      border-radius: 4px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      transition: color 0.2s;
+    }
+    .back-btn:hover {
+      color: var(--white);
+    }
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .icon-big {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .icon-big svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--gray-light);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .sub {
+      color: var(--gray);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 16px 0 8px;
+      color: var(--gray-light);
+    }
+    .section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    .rule {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+      padding-left: 4px;
+      margin-bottom: 4px;
+    }
+    .rule strong {
+      color: var(--gray-light);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    .footer {
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.20);
+      font-size: 9px;
+      letter-spacing: 0.3px;
+      text-align: center;
+    }
+
+    @media (max-width: 400px) {
+      .card {
+        padding: 24px 18px 20px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-bg">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="assets/header.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-overlay"></div>
+  <div class="dark-overlay"></div>
+
+  <div class="card">
+
+    <a href="upgrade.html" class="back-btn">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Kembali
+    </a>
+
+    <div class="icon-big">
+      <svg viewBox="0 0 24 24">
+        <rect x="2" y="7" width="20" height="14" rx="2"/>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+      </svg>
+    </div>
+
+    <h1>Syarat & Ketentuan</h1>
+    <div class="sub">Baca sebelum menggunakan layanan</div>
+
+    <div class="section-title">1. Penggunaan Layanan</div>
+    <div class="rule"><strong>1.1</strong> Layanan ini hanya untuk aktivasi premium Alight Motion.</div>
+    <div class="rule"><strong>1.2</strong> Setiap pengguna wajib memasukkan email yang valid.</div>
+    <div class="rule"><strong>1.3</strong> URL verifikasi harus sesuai dengan yang dikirim dari email resmi.</div>
+
+    <div class="section-title">2. Batasan</div>
+    <div class="rule"><strong>2.1</strong> Layanan ini tidak menjamin aktivasi 100% berhasil.</div>
+    <div class="rule"><strong>2.2</strong> Pengguna bertanggung jawab atas data yang dimasukkan.</div>
+    <div class="rule"><strong>2.3</strong> Dilarang menggunakan layanan untuk tujuan ilegal.</div>
+
+    <div class="section-title">3. Privasi</div>
+    <div class="rule"><strong>3.1</strong> Data email hanya digunakan untuk proses aktivasi.</div>
+    <div class="rule"><strong>3.2</strong> Kami tidak menyimpan data pengguna secara permanen.</div>
+
+    <div class="section-title">4. Perubahan</div>
+    <div class="rule"><strong>4.1</strong> Syarat dan ketentuan dapat berubah sewaktu-waktu.</div>
+    <div class="rule"><strong>4.2</strong> Pengguna diharapkan membaca ulang secara berkala.</div>
+
+    <div class="divider"></div>
+
+    <div style="font-size:12px;color:var(--gray-dark);text-align:center;">
+      Dengan menggunakan layanan ini, Anda menyetujui syarat & ketentuan di atas.
+    </div>
+
+    <div class="footer">NoerzXMotion · 2026</div>
+  </div>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('noerzx_theme') || 'dark';
+      const root = document.documentElement;
+      if (savedTheme === 'light') {
+        root.style.setProperty('--bg-body', '#f0f0f0');
+        root.style.setProperty('--text-body', '#111111');
+        root.style.setProperty('--white', '#111111');
+        root.style.setProperty('--gray-light', '#333333');
+        root.style.setProperty('--gray', '#666666');
+        root.style.setProperty('--gray-dark', '#999999');
+        root.style.setProperty('--gray-darker', '#cccccc');
+        root.style.setProperty('--gray-deep', '#e0e0e0');
+        root.style.setProperty('--black', '#f0f0f0');
+        root.style.setProperty('--border', 'rgba(0, 0, 0, 0.08)');
+        document.body.style.background = '#f0f0f0';
+        document.body.style.color = '#111111';
+        document.querySelector('.card').style.background = '#e8e8e8';
+      } else if (savedTheme === 'gray') {
+        root.style.setProperty('--bg-body', '#1a1a1a');
+        root.style.setProperty('--text-body', '#e8e8e8');
+        root.style.setProperty('--white', '#e8e8e8');
+        root.style.setProperty('--gray-light', '#cccccc');
+        root.style.setProperty('--gray', '#aaaaaa');
+        root.style.setProperty('--gray-dark', '#7a7a7a');
+        root.style.setProperty('--gray-darker', '#4a4a4a');
+        root.style.setProperty('--gray-deep', '#2a2a2a');
+        root.style.setProperty('--black', '#1a1a1a');
+        root.style.setProperty('--border', 'rgba(255, 255, 255, 0.06)');
+        document.body.style.background = '#1a1a1a';
+        document.body.style.color = '#e8e8e8';
+        document.querySelector('.card').style.background = '#222222';
+      } else {
+        root.style.setProperty('--bg-body', '#0a0a0a');
+        root.style.setProperty('--text-body', '#ffffff');
+        root.style.setProperty('--white', '#ffffff');
+        root.style.setProperty('--gray-light', '#d4d4d8');
+        root.style.setProperty('--gray', '#a1a1aa');
+        root.style.setProperty('--gray-dark', '#71717a');
+        root.style.setProperty('--gray-darker', '#3f3f46');
+        root.style.setProperty('--gray-deep', '#27272a');
+        root.style.setProperty('--black', '#0a0a0a');
+        root.style.setProperty('--border', 'rgba(255, 255, 255, 0.08)');
+        document.body.style.background = '#0a0a0a';
+        document.body.style.color = '#ffffff';
+        document.querySelector('.card').style.background = '#141418';
+      }
+    })();
+
+    const video = document.querySelector('video');
+    if (video) {
+      video.addEventListener('error', function() {
+        this.style.display = 'none';
+        document.querySelector('.video-bg').style.background = '#0a0a0a';
+      });
+    }
+  </script>
+
+</body>
+</html>

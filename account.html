@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Upgrade · Noerzpedia × Alight Motion</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* ================================
+       RESET
+    ================================ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --white: #ffffff;
+      --gray-light: #d4d4d8;
+      --gray: #a1a1aa;
+      --gray-dark: #71717a;
+      --gray-darker: #3f3f46;
+      --gray-deep: #27272a;
+      --black: #0a0a0a;
+
+      --input-bg: rgba(18, 18, 20, 0.72);
+      --border: rgba(255, 255, 255, 0.08);
+
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+
+      background: var(--black);
+      color: var(--white);
+
+      font-family: "Inter", sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+    }
+
+
+    /* ================================
+       VIDEO BACKGROUND
+    ================================ */
+
+    .video-bg {
+      position: fixed;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      z-index: -3;
+
+      overflow: hidden;
+    }
+
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+
+    /* ================================
+       VIDEO OVERLAY
+    ================================ */
+
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+
+      z-index: -2;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.60) 0%,
+          rgba(0, 0, 0, 0.70) 50%,
+          rgba(0, 0, 0, 0.85) 100%
+        );
+    }
+
+
+    /* ================================
+       EXTRA CONTRAST
+    ================================ */
+
+    .dark-overlay {
+      position: fixed;
+      inset: 0;
+
+      z-index: -1;
+
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(255, 255, 255, 0.02),
+          rgba(0, 0, 0, 0.20)
+        );
+    }
+
+
+    /* ================================
+       PAGE
+    ================================ */
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+
+      padding:
+        16px
+        16px
+        28px;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    /* ================================
+       TOP BAR
+    ================================ */
+
+    .topbar {
+      width: min(360px, 100%);
+
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    /* ================================
+       PROFILE BUTTON (LEFT) - ICON ONLY
+    ================================ */
+
+    .profile-button {
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid var(--border);
+      border-radius: 11px;
+
+      background: rgba(255, 255, 255, 0.04);
+
+      color: var(--white);
+
+      cursor: pointer;
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .profile-button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .profile-button svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--gray-light);
+      stroke-width: 2;
+      fill: none;
+    }
+
+
+    /* ================================
+       SERVER BADGE (RIGHT)
+    ================================ */
+
+    .server-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      padding: 6px 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 11px;
+
+      background: rgba(255, 255, 255, 0.03);
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gray);
+
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .server-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.4;
+        transform: scale(0.7);
+      }
+    }
+
+
+    /* ================================
+       MAIN AREA
+    ================================ */
+
+    .main {
+      width: min(360px, 100%);
+
+      margin:
+        auto
+        auto
+        0;
+
+      padding-bottom: 8vh;
+    }
+
+
+    /* ================================
+       HEADING
+    ================================ */
+
+    .heading {
+      margin-bottom: 32px;
+    }
+
+    .heading h1 {
+      font-size: 28px;
+      line-height: 1.18;
+
+      font-weight: 700;
+
+      letter-spacing: -0.5px;
+    }
+
+    .heading h1 .highlight {
+      color: var(--gray-light);
+    }
+
+    .heading p {
+      margin-top: 8px;
+
+      color: var(--gray);
+
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+
+    /* ================================
+       FORM
+    ================================ */
+
+    .form {
+      width: 100%;
+    }
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+    .field label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: var(--gray-light);
+
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .field label .hint {
+      color: var(--gray-dark);
+      font-weight: 400;
+      font-size: 11px;
+    }
+
+
+    /* ================================
+       INPUT
+    ================================ */
+
+    .input {
+      width: 100%;
+      height: 52px;
+
+      padding: 0 15px;
+
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      outline: none;
+
+      background: var(--input-bg);
+
+      color: var(--white);
+
+      font-family: inherit;
+      font-size: 13px;
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .input::placeholder {
+      color: var(--gray-dark);
+    }
+
+    .input:focus {
+      border-color: rgba(255, 255, 255, 0.25);
+
+      background: rgba(18, 18, 20, 0.86);
+
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.035);
+    }
+
+
+    /* ================================
+       SELECT
+    ================================ */
+
+    .select {
+      width: 100%;
+      height: 52px;
+
+      padding: 0 15px;
+
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      outline: none;
+
+      background: var(--input-bg);
+
+      color: var(--white);
+
+      font-family: inherit;
+      font-size: 13px;
+
+      appearance: none;
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2371717a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+    }
+
+    .select:focus {
+      border-color: rgba(255, 255, 255, 0.25);
+
+      background: rgba(18, 18, 20, 0.86);
+
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.035);
+    }
+
+    .select option {
+      background: #1a1a1e;
+      color: var(--white);
+    }
+
+
+    /* ================================
+       MAIN BUTTON
+    ================================ */
+
+    .main-button {
+      width: 100%;
+      height: 52px;
+
+      margin-top: 5px;
+
+      border: none;
+      border-radius: 13px;
+
+      background: var(--white);
+      color: var(--black);
+
+      font-family: inherit;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s ease,
+        background 0.2s ease;
+    }
+
+    .main-button:hover {
+      background: var(--gray-light);
+    }
+
+    .main-button:active {
+      transform: scale(0.985);
+    }
+
+    .main-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+
+    /* ================================
+       LOADING SPINNER
+    ================================ */
+
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-top-color: var(--black);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+    /* ================================
+       FOOTER
+    ================================ */
+
+    .footer {
+      margin-top: 24px;
+
+      text-align: center;
+
+      color: rgba(255, 255, 255, 0.20);
+
+      font-size: 9px;
+      letter-spacing: 0.3px;
+    }
+
+
+    /* ================================
+       CUSTOM MODAL (MONOCHROME)
+    ================================ */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+
+      z-index: 9999;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(0, 0, 0, 0.75);
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      padding: 24px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 360px;
+
+      background: #141418;
+
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+
+      padding: 32px 24px 28px;
+
+      text-align: center;
+
+      animation: modalFade 0.25s ease;
+    }
+
+    @keyframes modalFade {
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-icon {
+      width: 56px;
+      height: 56px;
+
+      margin: 0 auto 12px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-icon.success {
+      background: rgba(74, 222, 128, 0.10);
+    }
+
+    .modal-icon.success svg {
+      stroke: var(--green);
+    }
+
+    .modal-icon.error {
+      background: rgba(248, 113, 113, 0.10);
+    }
+
+    .modal-icon.error svg {
+      stroke: var(--red);
+    }
+
+    .modal-icon.warning {
+      background: rgba(250, 204, 21, 0.10);
+    }
+
+    .modal-icon.warning svg {
+      stroke: var(--yellow);
+    }
+
+    .modal-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 600;
+
+      margin-bottom: 6px;
+
+      color: var(--white);
+    }
+
+    .modal-message {
+      color: var(--gray);
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+      margin-bottom: 20px;
+
+      word-break: break-word;
+    }
+
+    .modal-message a {
+      color: var(--gray-light);
+      text-decoration: underline;
+      word-break: break-all;
+    }
+
+    .modal-button {
+      width: 100%;
+      height: 48px;
+
+      border: none;
+      border-radius: 12px;
+
+      background: var(--white);
+      color: var(--black);
+
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition: background 0.2s ease;
+    }
+
+    .modal-button:hover {
+      background: var(--gray-light);
+    }
+
+    .modal-button.secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--white);
+
+      margin-top: 8px;
+    }
+
+    .modal-button.secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .modal-link-box {
+      background: rgba(0, 0, 0, 0.30);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .modal-link-box span {
+      flex: 1;
+
+      font-size: 12px;
+      font-family: monospace;
+      color: var(--gray);
+
+      word-break: break-all;
+    }
+
+    .modal-link-box button {
+      padding: 6px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+
+      transition: background 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .modal-link-box button:hover {
+      background: rgba(255, 255, 255, 0.10);
+    }
+
+
+    /* ================================
+       TOAST NOTIFICATION
+    ================================ */
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      z-index: 10000;
+
+      width: 90%;
+      max-width: 360px;
+
+      pointer-events: none;
+    }
+
+    .toast {
+      padding: 14px 18px;
+
+      border-radius: 14px;
+
+      background: rgba(20, 20, 24, 0.94);
+
+      border: 1px solid rgba(255, 255, 255, 0.06);
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      pointer-events: auto;
+
+      animation: toastIn 0.35s ease;
+    }
+
+    .toast.hide {
+      animation: toastOut 0.3s ease forwards;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes toastOut {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+      }
+    }
+
+    .toast-icon {
+      width: 24px;
+      height: 24px;
+
+      flex-shrink: 0;
+    }
+
+    .toast-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .toast-icon.success svg {
+      stroke: var(--green);
+    }
+
+    .toast-icon.error svg {
+      stroke: var(--red);
+    }
+
+    .toast-icon.info svg {
+      stroke: var(--gray);
+    }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .toast-message {
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 1px;
+    }
+
+    .toast-close {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.20);
+      cursor: pointer;
+
+      font-size: 16px;
+
+      padding: 4px;
+
+      transition: color 0.2s ease;
+    }
+
+    .toast-close:hover {
+      color: rgba(255, 255, 255, 0.50);
+    }
+
+
+    /* ================================
+       SMALL SCREEN
+    ================================ */
+
+    @media (max-width: 400px) {
+
+      .page {
+        padding:
+          12px
+          14px
+          22px;
+      }
+
+      .heading h1 {
+        font-size: 24px;
+      }
+
+      .main {
+        padding-bottom: 5vh;
+      }
+
+      .modal {
+        padding: 24px 18px 20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =================================
+       VIDEO BACKGROUND
+  ================================= -->
+
+  <div class="video-bg">
+
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
+
+      <source
+        src="assets/header.mp4"
+        type="video/mp4"
+      >
+
+    </video>
+
+  </div>
+
+
+  <div class="video-overlay"></div>
+  <div class="dark-overlay"></div>
+
+
+
+  <!-- =================================
+       PAGE
+  ================================= -->
+
+  <div class="page">
+
+
+    <!-- =================================
+         TOP BAR
+    ================================= -->
+
+    <nav class="topbar">
+
+      <!-- PROFILE BUTTON (icon only) -->
+
+      <button
+        class="profile-button"
+        type="button"
+        onclick="showProfile()"
+        aria-label="Profile"
+      >
+
+        <svg viewBox="0 0 24 24">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+
+      </button>
+
+
+      <!-- SERVER BADGE -->
+
+      <div class="server-badge">
+
+        <span class="server-dot"></span>
+
+        Server Online
+
+      </div>
+
+    </nav>
+
+
+
+    <!-- =================================
+         MAIN CONTENT
+    ================================= -->
+
+    <main class="main">
+
+      <section class="heading">
+
+        <h1>
+          Noerzpedia <span class="highlight">×</span> Alight Motion
+        </h1>
+
+        <p>
+          Upgrade kreativitasmu bersama noerzpedia
+        </p>
+
+      </section>
+
+
+      <form
+        id="upgradeForm"
+        class="form"
+      >
+
+        <!-- EMAIL -->
+
+        <div class="field">
+
+          <label for="email">
+            Alamat Email
+          </label>
+
+          <input
+            id="email"
+            class="input"
+            type="email"
+            placeholder="you@domain.com"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <!-- URL (wajib) -->
+
+        <div class="field">
+
+          <label for="customUrl">
+            URL Verifikasi <span class="hint">(wajib)</span>
+          </label>
+
+          <input
+            id="customUrl"
+            class="input"
+            type="url"
+            placeholder="https://alight-creative.firebaseapp.co"
+            required
+          >
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <button
+          class="main-button"
+          type="submit"
+          id="submitBtn"
+        >
+          Kirim Permintaan
+        </button>
+
+      </form>
+
+
+      <div class="footer">
+        NoerzXMotion · version 1.1.0
+      </div>
+
+    </main>
+
+  </div>
+
+
+
+  <!-- =================================
+       CUSTOM MODAL
+  ================================= -->
+
+  <div class="modal-overlay" id="modalOverlay">
+
+    <div class="modal">
+
+      <div class="modal-icon" id="modalIcon">
+        <svg viewBox="0 0 24 24">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+      </div>
+
+      <div class="modal-title" id="modalTitle">Sukses</div>
+
+      <div class="modal-message" id="modalMessage">
+        Permintaan berhasil diproses.
+      </div>
+
+      <!-- Link box -->
+      <div id="modalLinkBox" style="display:none;">
+
+        <div class="modal-link-box">
+
+          <span id="modalLinkText">https://example.com</span>
+
+          <button id="modalCopyBtn">Salin</button>
+
+        </div>
+
+      </div>
+
+      <button
+        class="modal-button"
+        id="modalCloseBtn"
+      >
+        Tutup
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =================================
+       TOAST CONTAINER
+  ================================= -->
+
+  <div class="toast-container" id="toastContainer"></div>
+
+
+
+  <!-- ==========================================================
+       SCRIPT
+       ========================================================== -->
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ─── API ──────────────────────────────────────────────────────────
+      const API_URL = 'https://sylvatica.my.id/api/tools/alightmotion';
+      const API_KEY = 'sylva-0Pct5ozS';
+
+      // ─── DOM ──────────────────────────────────────────────────────────
+      const form = document.getElementById('upgradeForm');
+      const emailInput = document.getElementById('email');
+      const customUrlInput = document.getElementById('customUrl');
+      const submitBtn = document.getElementById('submitBtn');
+
+      const modalOverlay = document.getElementById('modalOverlay');
+      const modalIcon = document.getElementById('modalIcon');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalMessage = document.getElementById('modalMessage');
+      const modalLinkBox = document.getElementById('modalLinkBox');
+      const modalLinkText = document.getElementById('modalLinkText');
+      const modalCopyBtn = document.getElementById('modalCopyBtn');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+      const toastContainer = document.getElementById('toastContainer');
+
+      // ─── STATE ──────────────────────────────────────────────────────────
+      let modalLink = null;
+
+      // ─── TOAST ──────────────────────────────────────────────────────────
+      function showToast(title, message, type) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+
+        const iconMap = {
+          success: `
+            <svg viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          `,
+          error: `
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+          `,
+          info: `
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          `
+        };
+
+        toast.innerHTML = `
+          <div class="toast-icon ${type}">
+            ${iconMap[type] || iconMap.info}
+          </div>
+          <div class="toast-content">
+            <div class="toast-title">${title}</div>
+            <div class="toast-message">${message}</div>
+          </div>
+          <button class="toast-close" onclick="this.closest('.toast').remove()">✕</button>
+        `;
+
+        toastContainer.appendChild(toast);
+
+        setTimeout(function() {
+          if (toast.parentNode) {
+            toast.classList.add('hide');
+            setTimeout(function() {
+              if (toast.parentNode) toast.remove();
+            }, 350);
+          }
+        }, 5000);
+      }
+
+      // ─── PROFILE ────────────────────────────────────────────────────────
+      window.showProfile = function() {
+        showToast(
+          'Profile',
+          'NoerzXMotion · Version 1.1.0',
+          'info'
+        );
+      };
+
+      // ─── MODAL ────────────────────────────────────────────────────────
+      function openModal(iconType, title, message, link) {
+        modalIcon.className = 'modal-icon';
+
+        if (iconType === 'success') {
+          modalIcon.classList.add('success');
+          modalIcon.innerHTML = `
+            <svg viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          `;
+        } else if (iconType === 'error') {
+          modalIcon.classList.add('error');
+          modalIcon.innerHTML = `
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+          `;
+        } else {
+          modalIcon.classList.add('warning');
+          modalIcon.innerHTML = `
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          `;
+        }
+
+        modalTitle.textContent = title;
+        modalMessage.innerHTML = message;
+
+        if (link) {
+          modalLink = link;
+          modalLinkText.textContent = link;
+          modalLinkBox.style.display = 'block';
+        } else {
+          modalLinkBox.style.display = 'none';
+          modalLink = null;
+        }
+
+        modalOverlay.classList.add('active');
+      }
+
+      function closeModal() {
+        modalOverlay.classList.remove('active');
+      }
+
+      modalCloseBtn.addEventListener('click', closeModal);
+
+      modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) {
+          closeModal();
+        }
+      });
+
+      // ─── COPY LINK ────────────────────────────────────────────────────
+      modalCopyBtn.addEventListener('click', function() {
+        if (!modalLink) return;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(modalLink)
+            .then(function() {
+              modalCopyBtn.textContent = 'Disalin';
+              setTimeout(function() {
+                modalCopyBtn.textContent = 'Salin';
+              }, 2000);
+            })
+            .catch(function() {
+              fallbackCopy(modalLink);
+            });
+        } else {
+          fallbackCopy(modalLink);
+        }
+      });
+
+      function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+
+        try {
+          document.execCommand('copy');
+          modalCopyBtn.textContent = 'Disalin';
+          setTimeout(function() {
+            modalCopyBtn.textContent = 'Salin';
+          }, 2000);
+        } catch (e) {
+          // ignore
+        }
+
+        document.body.removeChild(ta);
+      }
+
+      // ─── EXTRACT URL FROM MESSAGE ────────────────────────────────────
+      function extractUrlFromMessage(msg) {
+        const m = msg.match(/https?:\/\/[^\s"]+/g);
+        return m && m.length > 0 ? m[0] : null;
+      }
+
+      // ─── FORM SUBMIT ─────────────────────────────────────────────────
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+        const customUrl = customUrlInput.value.trim();
+
+        // ── Validasi ──────────────────────────────────────────────────
+        if (!email) {
+          showToast('Error', 'Email wajib diisi.', 'error');
+          return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showToast('Error', 'Format email tidak valid.', 'error');
+          return;
+        }
+
+        if (!customUrl) {
+          showToast('Error', 'URL verifikasi wajib diisi.', 'error');
+          return;
+        }
+
+        try {
+          new URL(customUrl);
+        } catch (_) {
+          showToast('Error', 'URL verifikasi tidak valid.', 'error');
+          return;
+        }
+
+        // ── Loading ──────────────────────────────────────────────────
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner"></span> Memproses...';
+
+        showToast('Info', 'Sedang memproses permintaan...', 'info');
+
+        // ── Build URL ─────────────────────────────────────────────────
+        const params = new URLSearchParams();
+        params.append('email', email);
+        params.append('options', 'verify');
+        params.append('apikey', API_KEY);
+        params.append('url', customUrl);
+
+        const fullUrl = API_URL + '?' + params.toString();
+
+        // ── Fetch ─────────────────────────────────────────────────────
+        try {
+          const resp = await fetch(fullUrl, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+          });
+
+          const data = await resp.json();
+
+          if (resp.ok && data.status === true) {
+            const msg = data.message || 'Permintaan berhasil.';
+            let link = data.link || data.url || null;
+            if (!link) link = extractUrlFromMessage(msg);
+
+            showToast('Sukses', 'Permintaan berhasil diproses!', 'success');
+
+            if (link) {
+              openModal('success', 'Sukses!', msg, link);
+            } else {
+              openModal('success', 'Sukses!', msg);
+            }
+
+          } else {
+            const errMsg = data.message || data.error || 'Server menolak permintaan.';
+            showToast('Gagal', errMsg, 'error');
+            openModal('error', 'Gagal', errMsg);
+          }
+
+        } catch (err) {
+          console.error('[Upgrade]', err);
+          showToast('Error', 'Gagal terhubung ke server.', 'error');
+          openModal('error', 'Error', 'Gagal terhubung ke server. Periksa koneksi Anda.');
+        }
+
+        // ── Reset ────────────────────────────────────────────────────
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Kirim Permintaan';
+      });
+
+      // ─── VIDEO FALLBACK ──────────────────────────────────────────────
+      const video = document.querySelector('video');
+      if (video) {
+        video.addEventListener('error', function() {
+          this.style.display = 'none';
+          const wrapper = this.parentElement;
+          wrapper.style.background = '#0a0a0a';
+        });
+      }
+
+      console.log('[Upgrade] Noerzpedia × Alight Motion · Verify only');
+    })();
+  </script>
+
+</body>
+</html>
